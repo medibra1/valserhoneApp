@@ -28,9 +28,7 @@
               <a href="#">
                 <h4 class="sec-head">A propos de Valserhone Peinture</h4>
               </a>
-              <p>
-                Valserhone Peinture est une entreprise de peinture basée à Bellegarde-sur-Valserine. Nous nous occupons
-                des finissons de de vos bâtiments. Nous exercons dans les domaines suivants: </p>
+              <p>{{company?.apropos}} </p>
               <ul>
                 <li>
                   <i class="bi bi-check"></i> Peintures intérieures et extérieures
@@ -191,159 +189,22 @@
       </div>
       <div class="row text-center">
         <!-- Start Left services -->
-        <div class="col-md-4 col-sm-4 col-xs-12">
+
+        <div *ngFor="let service of services" class="col-md-4 col-sm-4 col-xs-12">
           <div class="about-move">
             <div class="services-details">
               <div class="single-services">
                 <a class="services-icon" href="#">
-                  <i class="bi bi-house"></i>
+                  <i class="{{service.icon_name}}"></i>
                 </a>
-                <h4>Peinture décorative</h4>
-                <p>
-                  Nous pouvons décorer votre masion selon vos goûts. choississez vos teintes et textures, nous ferons le
-                  reste.
+                <h4>{{service.service_nom}}</h4>
+                <p>{{service.service_description}}</p>
               </div>
             </div>
             <!-- end about-details -->
           </div>
         </div>
-        <div class="col-md-4 col-sm-4 col-xs-12">
-          <div class="about-move">
-            <div class="services-details">
-              <div class="single-services">
-                <a class="services-icon" href="#">
-                  <i class="bi bi-door-closed"></i>
-                </a>
-                <h4>Enduit décoratif </h4>
-                <p>
-                  On s'occupe de vos enduits decoratifs.
-                </p>
-              </div>
-            </div>
-            <!-- end about-details -->
-          </div>
-        </div>
-        <div class="col-md-4 col-sm-4 col-xs-12">
-          <!-- end col-md-4 -->
-          <div class=" about-move">
-            <div class="services-details">
-              <div class="single-services">
-                <a class="services-icon" href="#">
-                  <i class="bi bi-bricks"></i>
-                </a>
-                <h4>revêtements muraux </h4>
-                <p>
-                  On s'occupe de vos revêtements muraux.
-                </p>
-              </div>
-            </div>
-            <!-- end about-details -->
-          </div>
-        </div>
-        <div class="col-md-4 col-sm-4 col-xs-12">
-          <!-- end col-md-4 -->
-          <div class=" about-move">
-            <div class="services-details">
-              <div class="single-services">
-                <a class="services-icon" href="#">
-                  <i class="bi bi-building"></i>
-                </a>
-                <h4>papiers-peints</h4>
-                <p>
-                  On s'occupe de vos papiers-peints.
-                </p>
-              </div>
-            </div>
-            <!-- end about-details -->
-          </div>
-        </div>
-        <!-- End Left services -->
-        <div class="col-md-4 col-sm-4 col-xs-12">
-          <!-- end col-md-4 -->
-          <div class=" about-move">
-            <div class="services-details">
-              <div class="single-services">
-                <a class="services-icon" href="#">
-                  <i class="bi bi-door-open"></i>
-                </a>
-                <h4>revêtement de sol souple</h4>
-                <p>
-                  On s'occupe de vos revêtements de sol souple.
-                </p>
-              </div>
-            </div>
-            <!-- end about-details -->
-          </div>
-        </div>
-        <!-- End Left services -->
-        <div class="col-md-4 col-sm-4 col-xs-12">
-          <!-- end col-md-4 -->
-          <div class=" about-move">
-            <div class="services-details">
-              <div class="single-services">
-                <a class="services-icon" href="#">
-                  <i class="bi bi-shop"></i>
-                </a>
-                <h4>parquet flottant</h4>
-                <p>
-                  On s'occupe de vos parquets flottants.
-                </p>
-              </div>
-            </div>
-            <!-- end about-details -->
-          </div>
-        </div>
-        <div class="col-md-4 col-sm-4 col-xs-12">
-          <!-- end col-md-4 -->
-          <div class=" about-move">
-            <div class="services-details">
-              <div class="single-services">
-                <a class="services-icon" href="#">
-                  <i class="bi bi-border-outer"></i>
-                </a>
-                <h4>isolation extérieure</h4>
-                <p>
-                  On s'occupe de votre isolation extérieure.
-                </p>
-              </div>
-            </div>
-            <!-- end about-details -->
-          </div>
-        </div>
-        <div class="col-md-4 col-sm-4 col-xs-12">
-          <!-- end col-md-4 -->
-          <div class=" about-move">
-            <div class="services-details">
-              <div class="single-services">
-                <a class="services-icon" href="#">
-                  <i class="bi bi-bank"></i>
-                </a>
-                <h4>ravalement de façade</h4>
-                <p>
-                  On s'occupe de vos ravalements de façade.
-                </p>
-              </div>
-            </div>
-            <!-- end about-details -->
-          </div>
-        </div>
-        <div class="col-md-4 col-sm-4 col-xs-12">
-          <!-- end col-md-4 -->
-          <div class=" about-move">
-            <div class="services-details">
-              <div class="single-services">
-                <a class="services-icon" href="#">
-                  <i class="bi bi-exclude"></i>
-                </a>
-                <h4>Plâtrerie</h4>
-                <p>
-                  On s'occupe de plâterie.
-                </p>
-              </div>
-            </div>
-            <!-- end about-details -->
-          </div>
-        </div>
+
       </div>
     </div>
   </div>
@@ -368,7 +229,7 @@
   </div><!-- End Rviews Section -->
 
   <!-- ======= Portfolio Section ======= -->
-  <div id="portfolio" class="portfolio-area area-padding fix">
+   <!-- <div id="portfolio" class="portfolio-area area-padding fix">
     <div class="container">
       <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -378,7 +239,7 @@
         </div>
       </div>
       <div class="row wesome-project-1 fix">
-        <!-- Start Portfolio -page -->
+
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
           <ul id="portfolio-flters">
             <li data-filter="*" class="filter-active">Tous</li>
@@ -390,8 +251,7 @@
 
       <div class="row awesome-project-content portfolio-container">
 
-        <!-- portfolio-item start -->
-        <div class="col-md-4 col-sm-4 col-xs-12 portfolio-item filter-deco portfolio-item">
+        <div class="col-md-4 col-sm-4 col-xs-12 portfolio-item filter-deco">
           <div class="single-awesome-project">
             <div class="awesome-img">
               <a href="#"><img src="assets/img/portfolio/1.jpg" alt="" /></a>
@@ -406,9 +266,7 @@
             </div>
           </div>
         </div>
-        <!-- portfolio-item end -->
-
-        <!-- portfolio-item start -->
+     
         <div class="col-md-4 col-sm-4 col-xs-12 portfolio-item filter-peint">
           <div class="single-awesome-project">
             <div class="awesome-img">
@@ -424,9 +282,7 @@
             </div>
           </div>
         </div>
-        <!-- portfolio-item end -->
 
-        <!-- portfolio-item start -->
         <div class="col-md-4 col-sm-4 col-xs-12 portfolio-item filter-peint">
           <div class="single-awesome-project">
             <div class="awesome-img">
@@ -442,11 +298,59 @@
             </div>
           </div>
         </div>
-        <!-- portfolio-item end -->
 
       </div>
     </div>
-  </div><!-- End Portfolio Section -->
+  </div> --> 
+
+
+   <div id="portfolio" class="portfolio-area area-padding fix mb-1">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <div class="section-headline text-center">
+            <h2>Notre Portfolio</h2>
+          </div>
+        </div>
+      </div>
+      <div class="row wesome-project-1 fix">
+
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          <ul id="portfolio-flters">
+            <li data-filter="*" class="filter-active">Tous</li>
+            <ng-container *ngFor="let porto of portofolio"><li [attr.data-filter]="'.filter-'+porto.id">{{porto.service_nom}}</li></ng-container>
+          </ul>
+        </div>
+      </div>
+
+      <div class="row awesome-project-content portfolio-container">
+
+        <ng-container *ngFor="let porto of portofolio">
+          <ng-container *ngFor="let image of porto.works">
+            <div class="col-md-4 col-sm-4 col-xs-12 portfolio-item" [ngClass]="'filter-'+porto.id">
+              <div class="single-awesome-project">
+                <div class="awesome-img">
+                  <a href="#"><img [src]="downloadPortofoImage+image.travail_image" alt="" /></a>
+                  <div class="add-actions text-center">
+                    <div class="project-dec">
+                      <!-- <a class="portfolio-lightbox" data-gallery="myGallery" [href]="downloadPortofoImage+image.travail_image"> -->
+                      <a class="portfolio-lightbox" data-gallery="myGallery" href="javascript://">
+                        <h4>{{porto.description2}}</h4>
+                        <span>{{porto.description3}}</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+        </ng-container>
+
+      </div>
+    </div>
+  </div> 
+  
+  <!-- End Portfolio Section -->
 
   <!-- ======= Pricing Section ======= -->
   <!-- <div id="pricing" class="pricing-area area-padding">
@@ -520,20 +424,37 @@
       <div class="testimonials-slider swiper">
         <div class="swiper-wrapper">
 
-          <div class="swiper-slide">
+
+          <!-- <div *ngFor="let testimo of testimonials" class="swiper-slide">
             <div class="testimonial-item">
-              <img src="assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
-              <h3>François Dubois</h3>
-              <h4>Peinture décorative</h4>
+              <img [src]="Downloadimage+'/'+testimo.photo" class="testimonial-img" alt="">
+              <h3>{{testimo.nom}}</h3>
+              <h4>{{testimo.local}}</h4>
               <p>
                 <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                J'ai leur confié la finnitions de ma maison et j'ai pas regretté. Le service est irreprochable.
+                  {{testimo.texte}}
                 <i class="bx bxs-quote-alt-right quote-icon-right"></i>
               </p>
             </div>
-          </div><!-- End testimonial item -->
+          </div> -->
+          <ngb-carousel *ngIf="testimonials" [pauseOnHover]="pauseOnHover" [pauseOnFocus]="pauseOnFocus"
+            [showNavigationArrows]="showNavigationArrows" [showNavigationIndicators]="showNavigationIndicators">
+            <ng-template ngbSlide *ngFor="let testimo of testimonials">
+              <div class="testimonial-item">
+                <img [src]="Downloadimage+'/'+testimo.photo" class="testimonial-img" class="testimonial-img">
+                <h3>{{testimo.nom}}</h3>
+                <h4>{{testimo.local}}</h4>
+                <p style="width: 80vw">
+                  <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                  {{testimo.texte}}
+                  <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                </p>
+              </div>
+            </ng-template>
+          </ngb-carousel>
 
-          <div class="swiper-slide">
+
+          <!--  <div class="swiper-slide">
             <div class="testimonial-item">
               <img src="assets/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
               <h3>Jean Luc</h3>
@@ -544,10 +465,10 @@
                 <i class="bx bxs-quote-alt-right quote-icon-right"></i>
               </p>
             </div>
-          </div><!-- End testimonial item -->
+          </div> -->
 
         </div>
-        <div class="swiper-pagination"></div>
+        <!-- <div class="swiper-pagination"></div> -->
       </div>
 
     </div>
@@ -586,8 +507,8 @@
               <div class="single-icon">
                 <i class="bi bi-phone"></i>
                 <p>
-                  Appel: <a href="tel:+330650282937" class="link-dark"> (+33) 06 50 28 29 37</a><br>
-                  <span>Lundi-Vendredi (9h-17h)</span>
+                  Appel: <a href="tel:{{company?.tel}}" class="link-dark"> {{company?.tel}}</a><br>
+                  <span>{{company?.horaire}}</span>
                 </p>
               </div>
             </div>
@@ -598,8 +519,8 @@
               <div class="single-icon">
                 <i class="bi bi-envelope"></i>
                 <p>
-                  Email: Valserhonepeint@gmail.com<br>
-                  <span>Web: www.valserhonepeinture.com</span>
+                  Email: {{company?.email}}<br>
+                  <span>Site Web: {{company?.nomdomaine}}</span>
                 </p>
               </div>
             </div>
@@ -610,8 +531,8 @@
               <div class="single-icon">
                 <i class="bi bi-geo-alt"></i>
                 <p>
-                  Localisation: 49 rue la fayette<br>
-                  <span>bellegarde-sur-valserine, France</span>
+                  {{company?.adresse1}}<br>
+                  <span>{{company?.adresse2}}</span>
                 </p>
               </div>
             </div>
@@ -632,25 +553,37 @@
           <!-- Start  contact -->
           <div class="col-md-6">
             <div class="form contact-form">
-              <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+              <form (ngSubmit)="sendContactMessage()" [formGroup]="contactForm" role="form" class="php-email-form">
                 <div class="form-group">
-                  <input type="text" name="name" class="form-control" id="name" placeholder="Votre Nom" required>
+                  <input type="text" formControlName="nom" name="nom" class="form-control" id="name"
+                    placeholder="Votre Nom" required>
                 </div>
                 <div class="form-group mt-3">
-                  <input type="email" class="form-control" name="email" id="email" placeholder="Votre Email" required>
+                  <input type="email" formControlName="email" class="form-control" name="email" id="email"
+                    placeholder="Votre Email" required>
                 </div>
                 <div class="form-group mt-3">
-                  <input type="text" class="form-control" name="subject" id="subject" placeholder="Objet" required>
+                  <input type="text" formControlName="objet" class="form-control" name="objet" id="subject"
+                    placeholder="Objet" required>
                 </div>
                 <div class="form-group mt-3">
-                  <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
+                  <textarea class="form-control" formControlName="message" name="message" rows="5" placeholder="Message"
+                    required></textarea>
                 </div>
                 <div class="my-3">
                   <div class="loading">Loading</div>
-                  <div class="error-message"></div>
-                  <div class="sent-message">Your message has been sent. Thank you!</div>
+                  <div class="error-message d-block" *ngIf="errorMessage">
+                    <ul>
+                      <li>{{errorMessage.nom}}</li>
+                      <li>{{errorMessage.email}}</li>
+                      <li>{{errorMessage.objet}}</li>
+                      <li>{{errorMessage.message}}</li>
+                    </ul>
+                  </div>
+                  <div class="sent-message d-block" *ngIf="successMessage">{{successMessage}}</div>
                 </div>
-                <div class="text-center"><button type="submit">Envoyer le message</button></div>
+                <div class="text-center"><button type="submit" [disabled]="desableContactBtn">Envoyer le
+                    message</button></div>
               </form>
             </div>
           </div>

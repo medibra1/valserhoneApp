@@ -14,24 +14,27 @@
           <li><a class="nav-link scrollto" href="#home">Accueil</a></li>
           <li><a class="nav-link scrollto" href="#about">A propos</a></li>
           <!-- <li><a class="nav-link scrollto" href="#services">Services</a></li> -->
-          
+  
           <li class="dropdown"><a class="nav-link scrollto" href="#services"><span>Services</span> <i class="bi bi-chevron-down"></i></a>
             <ul>
-              <li><a href="#services">Peinture décorative</a></li>
-              <li><a href="#services">Enduit décoratif</a></li>
-              <li><a href="#services">revêtements muraux</a></li>
-              <li><a href="#services">papiers-peints</a></li>
-              <li><a href="#services">revêtement de sol souple</a></li>
-              <li><a href="#services">parquet flottant</a></li>
-              <li><a href="#services">isolation extérieure</a></li>
-              <li><a href="#services">ravalement de façade</a></li>
-              <li><a href="#services">Plâtrerie</a></li>
+              <ng-container *ngFor="let service of services">
+                <li><a class="nav-link scrollto" href="#services">{{service.service_nom}}</a></li>
+              </ng-container>
+              <!-- <li><a class="nav-link scrollto" href="#services">Peinture décorative</a></li>
+              <li><a class="nav-link scrollto" href="#services">Enduit décoratif</a></li>
+              <li><a class="nav-link scrollto" href="#services">revêtements muraux</a></li>
+              <li><a class="nav-link scrollto" href="#services">papiers-peints</a></li>
+              <li><a class="nav-link scrollto" href="#services">revêtement de sol souple</a></li>
+              <li><a class="nav-link scrollto" href="#services">parquet flottant</a></li>
+              <li><a class="nav-link scrollto" href="#services">isolation extérieure</a></li>
+              <li><a class="nav-link scrollto" href="#services">ravalement de façade</a></li>
+              <li><a class="nav-link scrollto" href="#services">Plâtrerie</a></li> -->
             </ul>
           </li>
 
           <li><a class="nav-link scrollto" href="#portfolio">Portfolio</a></li>
           <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
-          <li><a class="nav-link scrollto" href="tel:+330650282937"> <i class="bi bi-telephone-fill"></i> &nbsp; (+33) 0650282937</a></li>
+          <li><a class="nav-link scrollto" href="tel:{{company?.tel}}"> <i class="bi bi-telephone-fill"></i> &nbsp; {{company?.tel}}</a></li>
         </ul>
         <!-- <ul *ngIf="navbarOpen" (click)="toggleNavbar()">
           <li><a class="nav-link scrollto" href="#home" >Accueil</a></li>

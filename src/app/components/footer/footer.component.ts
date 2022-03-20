@@ -1,4 +1,7 @@
 import { Component, HostListener, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { Company } from 'src/app/models/slider';
+import { MainService } from 'src/app/services/main.service';
 
 @Component({
   selector: 'app-footer',
@@ -10,8 +13,10 @@ export class FooterComponent implements OnInit {
   windowScrolled = false;
 
   public currentYear = new Date().getFullYear();
+  companySub!: Subscription;
+  company!: Company;
 
-  constructor() { }
+  constructor(private mainService: MainService) { }
 
   /* @HostListener("window:scroll", [])
     onWindowScroll() {
@@ -23,6 +28,11 @@ export class FooterComponent implements OnInit {
       } */
 
   ngOnInit(): void {
-  }
+    this.companySub = this.mainService.companySubj.subscribe({
+      next: data => {
+        this.company = data;
+      }
+    })
+}
 
 }

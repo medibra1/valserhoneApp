@@ -218,7 +218,7 @@ function globalJs() { (function() {
   /**
    * Testimonials slider
    */
-  new Swiper('.testimonials-slider', {
+  /* new Swiper('.testimonials-slider', {
     speed: 600,
     loop: true,
     autoplay: {
@@ -231,7 +231,7 @@ function globalJs() { (function() {
       type: 'bullets',
       clickable: true
     }
-  });
+  }); */
 
 })()
 }

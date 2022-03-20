@@ -2,6 +2,309 @@
 
 <section id="home">
     <ngb-carousel #carousel [interval]="2000" [pauseOnHover]="pauseOnHover" [pauseOnFocus]="pauseOnFocus"
+        (slide)="onSlide($event)" *ngIf="sliders">
+        <ng-template *ngFor="let slider of sliders" ngbSlide>
+            <div class="picsum-img-wrapper">
+                <img class="img" [src]="Downloadimage +'/'+slider.slider_image" alt="">
+            </div>
+            <div class="carousel-caption my-slide-container">
+                <h2 class="animate__animated animate__fadeInDown">{{slider.description1 }}</h2>
+                <p class="animate__animated animate__fadeInUp">{{slider.description2}}</p>
+                <a href="#" class="btn-get-started scrollto animate__animated animate__fadeInUp"
+                    (click)="open(content)">Avoir un dévis</a>
+            </div>
+        </ng-template>
+    </ngb-carousel>
+</section>
+
+<ng-template #content let-modal>
+    <form (ngSubmit)="sendDevis()" [formGroup]="devisForm">
+        <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">Demande de dévis</h4>
+            <button type="button" [disabled]="desableButton" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+        </div>
+        <div class="modal-body">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Reserve ton service en moins 60 seconds</h5>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <h5>Contact Information</h5>
+                        <p>Il sera utilisé pour vous recontacter concerant le service demandé.</p>
+                        <div class="mb-2">
+                            <label for="nom">Nom</label>
+                            <div class="input-group">
+                                <input type="text" formControlName="nom" id="nom" class="form-control"
+                                    placeholder="Votre Nom..." name="nom">
+                                <button class="btn btn-outline-secondary bi-person" type="button"></button>
+                            </div>
+                        </div>
+                        <div class="mb-2">
+                            <label for="adresse">Adresse</label>
+                            <div class="input-group">
+                                <input type="text" formControlName="adresse" id="adresse" class="form-control"
+                                    placeholder="Votre Adresse..." name="adresse">
+                                <button class="btn btn-outline-secondary bi-geo-alt" type="button"></button>
+                            </div>
+                        </div>
+                        <div class="mb-2">
+                            <label for="telephone">Téléphone</label>
+                            <div class="input-group">
+                                <input type="tel" formControlName="telephone" id="telephone" class="form-control"
+                                    placeholder="Votre Tel..." name="telephone">
+                                <button class="btn btn-outline-secondary bi-telephone" type="button"></button>
+                            </div>
+                        </div>
+                        <div class="mb-2">
+                            <label for="email">Email</label>
+                            <div class="input-group">
+                                <input type="email" formControlName="email" id="email" class="form-control"
+                                    placeholder="Votre Email.." name="email">
+                                <button class="btn btn-outline-secondary bi-envelope" type="button"></button>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="list-group-item">
+                        <h5>Information du local</h5>
+                        <p>Parlez-nous de votre local</p>
+                        <div class="row">
+                            <div class="mb-2 col-6 col-md-6 col-sm-6">
+                                <label for="dim_interieur">Mûrs intérieurs (en m²)</label>
+                                <div class="input-group">
+                                    <input type="number" min="0" formControlName="dim_interieur" id="dim_interieur"
+                                        class="form-control" placeholder="Dimension intérieur..." name="dim_interieur">
+                                </div>
+                            </div>
+                            <div class="mb-2 col-6 col-md-6 col-sm-6">
+                                <label for="serive_interieur">Services </label>
+                                <div class="input-group">
+                                    <select class="form-select" id="serive_interieur"
+                                        formControlName="service_interieur" aria-label="Default select example">
+                                        <option>Selectionner un service...</option>
+                                        <ng-container *ngFor="let service of services">
+                                            <option value="{{service.service_nom}}">{{service.service_nom}}</option>
+                                        </ng-container>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="mb-2 col-6 col-md-6 col-sm-6">
+                                <label for="dim_plafond">plafond (en m²)</label>
+                                <div class="input-group">
+                                    <input type="number" formControlName="dim_plafond" min="0" id="dim_plafond"
+                                        class="form-control" placeholder="Dimension plafond..." name="dim_plafond">
+                                </div>
+                            </div>
+                            <div class="mb-2 col-6 col-md-6 col-sm-6">
+                                <label for="service_plafond">Services </label>
+                                <div class="input-group">
+                                    <select class="form-select" id="service_plafond" formControlName="service_plafond"
+                                        aria-label="Default select example">
+                                        <option>Selectionner un service...</option>
+                                        <ng-container *ngFor="let service of services">
+                                            <option value="{{service.service_nom}}">{{service.service_nom}}</option>
+                                        </ng-container>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="mb-2 col-6 col-md-6 col-sm-6">
+                                <label for="dim_exterieur">Mûrs extérieurs (en m²)</label>
+                                <div class="input-group">
+                                    <input type="number" formControlName="dim_exterieur" min="0" id="dim_exterieur"
+                                        class="form-control" placeholder="Dimension murs extérieurs..."
+                                        name="dim_exterieur">
+                                </div>
+                            </div>
+                            <div class="mb-2 col-6 col-md-6 col-sm-6">
+                                <label for="serice_exterieur">Services </label>
+                                <div class="input-group">
+                                    <select class="form-select" id="service_exterieur"
+                                        formControlName="service_exterieur" aria-label="Default select example">
+                                        <option>Selectionner un service...</option>
+                                        <ng-container *ngFor="let service of services">
+                                            <option value="{{service.service_nom}}">{{service.service_nom}}</option>
+                                        </ng-container>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="mb-2 col-6 col-md-6 col-sm-6">
+                                <label for="dim_sol_exterieur">Sol extérieur (en m²)</label>
+                                <div class="input-group">
+                                    <input type="number" formControlName="dim_sol_exterieur" min="0"
+                                        id="dim_sol_exterieur" class="form-control"
+                                        placeholder="Dimension murs extérieurs..." name="dim_sol_exterieur">
+                                </div>
+                            </div>
+                            <div class="mb-2 col-6 col-md-6 col-sm-6">
+                                <label for="service_sol_interieur">Services </label>
+                                <div class="input-group">
+                                    <select class="form-select" id="service_sol_interieur"
+                                        formControlName="service_sol_interieur" aria-label="Default select example">
+                                        <option>Selectionner un service...</option>
+                                        <ng-container *ngFor="let service of services">
+                                            <option value="{{service.service_nom}}">{{service.service_nom}}</option>
+                                        </ng-container>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="mb-2 col-6 col-md-6 col-sm-6">
+                                <label for="dim_sol_interieur">Sol intérieur (en m²)</label>
+                                <div class="input-group">
+                                    <input type="number" formControlName="dim_sol_interieur" min="0"
+                                        id="dim_sol_interieur" class="form-control"
+                                        placeholder="Dimension murs extérieurs..." name="dim_sol_interieur">
+                                </div>
+                            </div>
+                            <div class="mb-2 col-6 col-md-6 col-sm-6">
+                                <label for="service_sol_exterieur">Services </label>
+                                <div class="input-group">
+                                    <select class="form-select" id="service_sol_exterieur"
+                                        formControlName="service_sol_exterieur" aria-label="Default select example">
+                                        <option>Selectionner un service...</option>
+                                        <ng-container *ngFor="let service of services">
+                                            <option value="{{service.service_nom}}">{{service.service_nom}}</option>
+                                        </ng-container>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="mb-2 col-6 col-md-6 col-sm-6">
+                                <label for="divers_libelle">Divers</label>
+                                <div class="input-group">
+                                    <input type="text" id="divers_libelle" formControlName="divers_libelle"
+                                        class="form-control" placeholder="Divers..." name="divers_libelle">
+                                </div>
+                            </div>
+                            <div class="mb-2 col-6 col-md-6 col-sm-6">
+                                <label for="divers_dim">Divers Dimension (en m²) </label>
+                                <div class="input-group">
+                                    <input type="number" min="0" formControlName="divers_dim" id="divers_dim"
+                                        class="form-control" placeholder="Divers..." name="divers_dim">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li class="list-group-item">
+                        <h5>Description</h5>
+                        <label for="description">Des informations complementaires ?</label>
+                        <div class="input-group">
+                            <textarea formControlName="description" id="description" class="form-control"
+                                placeholder="Info complémentaire..."></textarea>
+                            <button class="btn btn-outline-secondary bi-list" type="button"></button>
+                        </div>
+                    </li>
+
+                    <li class="list-group-item">
+                        <h5>Votre disponibilité</h5>
+                        <p>Quand voulez-vous que nous venions?</p>
+                        <div class="row">
+                            <div class="mb-2 col-4 col-md-4 col-sm-4">
+                                <label for="date">Date</label>
+                                <div class="input-group">
+                                    <input type="date" id="date" formControlName="date" class="form-control"
+                                        placeholder="yyyy-mm-dd">
+                                    <!-- <input id="date" formControlName="date" class="form-control" placeholder="yyyy-mm-dd" (click)="dp.toggle()" [minDate]="{year: currentYear, month: currentMonth, day: currentDate}" name="dp" ngbDatepicker #dp="ngbDatepicker"> -->
+                                    <!-- <button class="btn btn-outline-secondary bi-calendar" (click)="dp.toggle()"type="button"></button> -->
+                                </div>
+                            </div>
+                            <div class="col-8 col-md-8 col-sm-8 text-right">
+                                <!-- <span class="hidden-xs">Tout moment entre &nbsp;</span> -->
+                                <div>Tout moment entre</div>
+                                <div class="input-group">
+                                    <select formControlName="heure1" name="heure1" class="form-select">
+                                        <option value="8">8:00 AM</option>
+                                        <option value="9">9:00 AM</option>
+                                        <option value="10">10:00 AM</option>
+                                        <option value="11">11:00 AM</option>
+                                        <option value="12">12:00 NN</option>
+                                        <option value="13">13:00 PM</option>
+                                        <option value="14">14:00 PM</option>
+                                        <option value="15">15:00 PM</option>
+                                        <option value="16">16:00 PM</option>
+                                        <option value="17">17:00 PM</option>
+                                    </select>
+
+                                    <span class="text-center">&nbsp;_&nbsp;</span>
+
+                                    <select formControlName="heure2" name="heure2" class="form-select">
+                                        <option value="9">9:00 AM</option>
+                                        <option value="10">10:00 AM</option>
+                                        <option value="11">11:00 AM</option>
+                                        <option value="12">12:00 NN</option>
+                                        <option value="13">13:00 PM</option>
+                                        <option value="14">14:00 PM</option>
+                                        <option value="15">15:00 PM</option>
+                                        <option value="16">16:00 PM</option>
+                                        <option value="17">17:00 PM</option>
+                                        <option value="18">18:00 PM</option>
+                                    </select>
+
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- <pre>{{devisForm.value | json}}</pre> -->
+        <div class="alert alert-danger text-center" role="alert" *ngIf="errorMessage">
+            <ul>
+                <li>{{errorMessage.nom}}</li>
+                <li>{{errorMessage.email}}</li>
+                <li>{{errorMessage.heure1}}</li>
+            </ul>
+        </div>
+        <div class="alert alert-danger text-center" role="alert" *ngIf="errorMessage2">{{errorMessage2}}</div>
+        <div class="alert alert-success text-center" role="alert" *ngIf="successMessage">{{successMessage}}</div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary"
+                (click)="modal.dismiss('cancel click')" [disabled]="desableButton">Annuler</button>
+            <button type="submit" class="btn btn-outline-dark" [disabled]="desableButton">Envoyer</button>
+        </div>
+    </form>
+</ng-template>
+<!-- <section id="hero">
+    <div class="hero-container">
+        <div id="heroCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="5000">
+            <ol id="hero-carousel-indicators" class="carousel-indicators"></ol>
+            <div class="carousel-inner" role="listbox">
+                    <ngb-carousel #carousel [interval]="2000" [pauseOnHover]="pauseOnHover"
+                        [pauseOnFocus]="pauseOnFocus" (slide)="onSlide($event)" *ngIf="sliders">
+                        <ng-template *ngFor="let slider of sliders" ngbSlide>
+                            <div class="carousel-item active">
+                                <img class="img" [src]="Downloadimage +'/'+slider.slider_image" alt="">
+                            </div>
+                            <div class="carousel-container">
+                                <div class="container">
+                                    <h2 class="animate__animated animate__fadeInDown">{{slider.description1 }}</h2>
+                                    <p class="animate__animated animate__fadeInUp">{{slider.description2}}</p>
+                                    <a href="#contact"
+                                        class="btn-get-started scrollto animate__animated animate__fadeInUp">Avoir un
+                                        dévis</a>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </ngb-carousel>
+                </div>
+        </div>
+    </div>
+</section> -->
+
+<!-- <section id="hero">
+    <ngb-carousel #carousel [interval]="2000" [pauseOnHover]="pauseOnHover" [pauseOnFocus]="pauseOnFocus"
         (slide)="onSlide($event)" *ngIf="images">
         <ng-template ngbSlide *ngFor="let img of images; index as i" ngbSlide>
             <div class="picsum-img-wrapper">
@@ -14,7 +317,7 @@
             </div>           
         </ng-template>
     </ngb-carousel>
-</section>
+</section> -->
 
 
 <!-- <section id="hero">
